@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1069651698910",
+    "firebase_url": "https://restaurantmate-v1.firebaseio.com",
+    "project_id": "restaurantmate-v1",
+    "storage_bucket": "restaurantmate-v1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069651698910:android:471a448e973d3e22",
+        "android_client_info": {
+          "package_name": "com.app.fa.restaurantmate_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069651698910-qtpdk63m9m0c5ggv6tiom2i2p1u2s6mq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.fa.restaurantmate_v1",
+            "certificate_hash": "52FCEBD34DF6E49B349D1B21354465373EFE4135"
+          }
+        },
+        {
+          "client_id": "1069651698910-3jtcfe4cufh6in7h2t44g2t2h855dp1v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDksDREMXp7hQcXIniBuFZk2yuS8YTS0T4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069651698910-3jtcfe4cufh6in7h2t44g2t2h855dp1v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
