@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:paddingLeft="16dp"
+        android:layout_height="48dp"
+        android:paddingRight="16dp">
+
+    <TextView
+        android:id="@+id/text1_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test1111111"
+        android:textSize="16sp"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="true" />
+
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/avatar_imageview"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="40dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="40dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_centerVertical="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:contentDescription="test"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:src="@drawable/ic_face_black_48dp"/>&ndash;&gt;-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/textview_container"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignWithParentIfMissing="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:layout_toRightOf="@+id/avatar_imageview"-->
+            <!--android:orientation="vertical"-->
+            <!--android:paddingBottom="16dp"-->
+            <!--android:paddingTop="16dp"-->
+            <!--android:layout_marginLeft="16dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/text1_textview"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="test1111111"-->
+                <!--android:textSize="16sp" />-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/text2_textview"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="test2222222"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>&ndash;&gt;-->
+
+        <!--</LinearLayout>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/icon_imageview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:contentDescription="test"-->
+            <!--android:src="@drawable/ic_face_black_18dp"/>-->
+
+    </RelativeLayout>
+
