@@ -6,16 +6,19 @@
         android:layout_width="match_parent"
         android:paddingLeft="16dp"
         android:layout_height="48dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+        android:id="@+id/food_cat">
 
-    <TextView
-        android:id="@+id/text1_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test1111111"
-        android:textSize="16sp"
-        android:layout_centerInParent="false"
-        android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/text1_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test1111111"
+            android:textSize="16sp"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
             <!--&lt;!&ndash;android:id="@+id/avatar_imageview"&ndash;&gt;-->
