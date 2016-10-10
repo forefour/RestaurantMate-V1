@@ -38,5 +38,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
 }
 apply plugin: 'com.google.gms.google-services'
