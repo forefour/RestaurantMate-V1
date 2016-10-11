@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.CatAdapter;
-import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
-
 import java.util.ArrayList;
 import java.util.List;
 
