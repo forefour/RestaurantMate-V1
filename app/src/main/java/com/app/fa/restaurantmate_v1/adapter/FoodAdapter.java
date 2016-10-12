@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 
 import com.app.fa.restaurantmate_v1.Activity.ChoseFoodActivity;
+import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
 import com.app.fa.restaurantmate_v1.R;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -34,6 +35,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
+    private String from;
+
+
     //**************************view Holder**********************************
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView text1;
@@ -49,9 +53,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     }
 
 
-    public FoodAdapter(Context mContext, List<String[]> catList) {
+    public FoodAdapter(Context mContext, List<String[]> catList, String from) {
         this.mContext = mContext;
         this.catList = catList;
+        this.from = from;
     }
 
     @Override
@@ -69,22 +74,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MaterialDialog materialDialog = new MaterialDialog.Builder(mContext)
-//                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-//                            @Override
-//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                                Log.d("foodDialog","agree");
-//                            }
-//                        }).onNegative(new MaterialDialog.SingleButtonCallback() {
-//                            @Override
-//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-//                                Log.d("foodDialog","cancel");
-//                            }
-//                        }).title("title")
-//                        .content("content")
-//                        .positiveText("agree")
-//                        .negativeText("cancel")
-//                        .show();
                 showLocationDialog();
 
             }
@@ -98,7 +87,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     }
 
     private void showLocationDialog() {
-        View viewRoot = ((ChoseFoodActivity)mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        View viewRoot = null;
+        if(this.from.equals("foodActivity")) {
+            viewRoot = ((ChoseFoodActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        }
+        else if(this.from.equals("foodNow")){
+            viewRoot = ((OrderActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("ปลากระพงทอดน้ำปลา");
         builder.setView(viewRoot);

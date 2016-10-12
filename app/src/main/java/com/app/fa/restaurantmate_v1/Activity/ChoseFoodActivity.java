@@ -47,7 +47,7 @@ public class ChoseFoodActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this));
         // specify an adapter (see also next example)
-        mAdapter = new FoodAdapter(this,myDataset);
+        mAdapter = new FoodAdapter(this,myDataset,"foodActivity");
         mRecyclerView.setAdapter(mAdapter);
 
 
