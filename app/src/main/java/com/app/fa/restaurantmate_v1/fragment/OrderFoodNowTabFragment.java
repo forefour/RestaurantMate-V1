@@ -31,7 +31,7 @@ public class OrderFoodNowTabFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<String[]> myDataset;
-    FloatingActionButton fab;
+    private FloatingActionButton fab;
 
     public OrderFoodNowTabFragment() {
         myDataset = new ArrayList<>();
@@ -67,7 +67,7 @@ public class OrderFoodNowTabFragment extends Fragment {
         mAdapter = new FoodAdapter(getContext(),myDataset,"foodNow");
         mRecyclerView.setAdapter(mAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        fab = (FloatingActionButton) getView().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

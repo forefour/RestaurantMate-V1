@@ -90,44 +90,86 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         View viewRoot = null;
         if(this.from.equals("foodActivity")) {
             viewRoot = ((ChoseFoodActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("ปลากระพงทอดน้ำปลา");
+            builder.setView(viewRoot);
+            //custom view
+            AppCompatSpinner spinner = (AppCompatSpinner) viewRoot.findViewById(R.id.planets_spinner);
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(mContext,
+                    R.array.planets_array, android.R.layout.simple_spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            spinner.setAdapter(adapter);
+
+
+            String positiveText = "สั่ง";
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("foodDialog","agree2");
+                        }
+                    });
+
+            String negativeText = "ยกเลิก";
+            builder.setNegativeButton(negativeText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("foodDialog","cancel2");
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            // display dialog
+            dialog.show();
         }
         else if(this.from.equals("foodNow")){
             viewRoot = ((OrderActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("ปลากระพงทอดน้ำปลา");
+            builder.setView(viewRoot);
+            //custom view
+            AppCompatSpinner spinner = (AppCompatSpinner) viewRoot.findViewById(R.id.planets_spinner);
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(mContext,
+                    R.array.planets_array, android.R.layout.simple_spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            spinner.setAdapter(adapter);
+
+
+            String positiveText = "สั่ง";
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("foodDialog","agree2");
+                        }
+                    });
+
+            String negativeText = "ยกเลิก";
+            builder.setNegativeButton(negativeText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("foodDialog","cancel2");
+                        }
+                    });
+            String neutralText = "ลบ";
+            builder.setNeutralButton(neutralText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("foodDialog","cancel3");
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            // display dialog
+            dialog.show();
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("ปลากระพงทอดน้ำปลา");
-        builder.setView(viewRoot);
-        //custom view
-        AppCompatSpinner spinner = (AppCompatSpinner) viewRoot.findViewById(R.id.planets_spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(mContext,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-
-
-        String positiveText = "สั่ง";
-        builder.setPositiveButton(positiveText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("foodDialog","agree2");
-                    }
-                });
-
-        String negativeText = "ยกเลิก";
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("foodDialog","cancel2");
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
     }
 }
