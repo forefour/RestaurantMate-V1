@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
+import com.app.fa.restaurantmate_v1.Activity.TableActivity;
 
 public class MainActivity extends AppCompatActivity {
 //    private Toolbar toolbar;
@@ -26,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // table page
+        Button tableButton = (Button)findViewById(R.id.table_button);
+        tableButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TableActivity.class);
                 startActivity(intent);
             }
         });
