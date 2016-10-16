@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.FoodAdapter;
+import com.app.fa.restaurantmate_v1.adapter.FoodTotalAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,9 @@ public class OrderFoodTotalTabFragment extends Fragment {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
+        //mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         // specify an adapter (see also next example)
-        mAdapter = new FoodAdapter(getContext(),myDataset,"foodNow");
+        mAdapter = new FoodTotalAdapter(getContext(),myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
         fab = (FloatingActionButton) getView().findViewById(R.id.fab);

@@ -4,12 +4,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
@@ -31,12 +36,13 @@ public class FoodTotalAdapter extends RecyclerView.Adapter<FoodTotalAdapter.MyVi
         public TextView text1;
         public TextView text2;
         public View view;
+        public ImageButton imageButton;
 
         public MyViewHolder(View view) {
             super(view);
             text1 = (TextView) view.findViewById(R.id.text1_textview);
-            this.view = view;
-            //text2 = (TextView) view.findViewById(R.id.text2_textview);
+            this.view = view.findViewById(R.id.root_food_total);
+            this.imageButton = (ImageButton)view.findViewById(R.id.menu_popup);
         }
     }
 
@@ -55,14 +61,20 @@ public class FoodTotalAdapter extends RecyclerView.Adapter<FoodTotalAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.text1.setText(catList.get(position)[0]);
         //holder.text2.setText(catList.get(position)[1]);
-        holder.view.setOnClickListener(new View.OnClickListener() {
+//        holder.view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showLocationDialog();
+//
+//            }
+//        });
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLocationDialog();
-
+                showPopup(holder.imageButton,position);
             }
         });
     }
@@ -121,5 +133,29 @@ public class FoodTotalAdapter extends RecyclerView.Adapter<FoodTotalAdapter.MyVi
         // display dialog
         dialog.show();
 
+    }
+
+    private void showPopup(View view, final int position) {
+        // pass the imageview id
+        //View menuItemView = view.findViewById(R.id.btn_song_list_more);
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
+        MenuInflater inflate = popup.getMenuInflater();
+        inflate.inflate(R.menu.item_menu, popup.getMenu());
+
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.edit:
+                        Log.d("popupmenu-> ","delete");
+                        showLocationDialog();
+
+
+                }
+                return false;
+            }
+        });
+        popup.show();
     }
 }
