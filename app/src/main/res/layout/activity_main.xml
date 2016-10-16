@@ -19,4 +19,12 @@
         android:layout_height="wrap_content"
         android:text="Order Page"
         android:id="@+id/order_button"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Table Page"
+        android:id="@+id/table_button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
