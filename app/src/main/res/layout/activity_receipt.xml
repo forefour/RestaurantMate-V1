@@ -45,7 +45,7 @@
                 android:textSize="18sp"
                 android:textStyle="normal|bold"
                 android:padding="10dp"
-                android:gravity="right" />
+                android:gravity="left" />
         </LinearLayout>
     </ScrollView>
 

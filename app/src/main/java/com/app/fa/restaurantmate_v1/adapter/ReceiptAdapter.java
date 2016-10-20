@@ -25,7 +25,7 @@ import java.util.List;
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder>{
     private Context mContext;
     private List<String[]> catList;
-
+    int i=1;
     //**************************view Holder**********************************
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView text1;
@@ -56,7 +56,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        holder.text1.setText("ปลากระพงทอดน้ำปลา (1)");
+        holder.text1.setText("ปลากระพงทอดน้ำปลา (1) "+i);
+        i++;
         //holder.text2.setText(catList.get(position)[1]);
     }
 
