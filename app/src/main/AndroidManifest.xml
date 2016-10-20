@@ -25,7 +25,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.OrderActivity" />
         </activity>
-        <activity android:name=".Activity.TableActivity"></activity>
+        <activity android:name=".Activity.TableActivity" />
+        <activity android:name=".Activity.ReceiptActivity"
+            android:parentActivityName=".Activity.OrderActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.OrderActivity" />
+        </activity>
     </application>
 
 </manifest>

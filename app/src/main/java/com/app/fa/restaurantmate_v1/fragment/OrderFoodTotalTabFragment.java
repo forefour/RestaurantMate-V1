@@ -1,6 +1,7 @@
 package com.app.fa.restaurantmate_v1.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
+import com.app.fa.restaurantmate_v1.Activity.ReceiptActivity;
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
+import com.app.fa.restaurantmate_v1.MainActivity;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.FoodAdapter;
 import com.app.fa.restaurantmate_v1.adapter.FoodTotalAdapter;
@@ -68,7 +72,8 @@ public class OrderFoodTotalTabFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Click action
-                Log.d("FloatingActionButton","FloatingActionButton2");
+                Intent intent = new Intent(getContext(), ReceiptActivity.class);
+                startActivity(intent);
             }
         });
 
