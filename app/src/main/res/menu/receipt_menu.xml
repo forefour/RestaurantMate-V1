@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/printReceipt"
+        android:title="Print ใยเสร็จ"></item>
+    <item
+        android:id="@+id/clearTable"
+        android:title="เก็บโต๊ะ"></item>
+</menu>

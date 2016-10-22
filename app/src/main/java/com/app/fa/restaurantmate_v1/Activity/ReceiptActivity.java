@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
 import com.app.fa.restaurantmate_v1.R;
@@ -28,8 +32,10 @@ public class ReceiptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receipt);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        String title = getIntent().getStringExtra("title");
+        toolbar.setTitle("ใบเสร็จรับเงิน "+title);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         myDataset = new ArrayList<>();
         for(int i=1; i<=20; i++){
@@ -49,5 +55,34 @@ public class ReceiptActivity extends AppCompatActivity {
         // specify an adapter (see also next example)
         mAdapter = new ReceiptAdapter(this,myDataset);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.receipt_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.receipt_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.printReceipt:
+                Log.d("Menu_bar","printReceipt");
+                return true;
+            case R.id.clearTable:
+                Log.d("Menu_bar","clearTable");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

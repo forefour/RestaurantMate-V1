@@ -28,6 +28,7 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("โต๊ะที่ 1");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -75,6 +76,10 @@ public class OrderActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    public Toolbar getToolbar(){
+        return toolbar;
     }
 
 //    private void setupTabIcons() {

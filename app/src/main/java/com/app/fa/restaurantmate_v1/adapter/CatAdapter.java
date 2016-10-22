@@ -54,13 +54,14 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.text1.setText(catList.get(position)[0]);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Foremost","123");
                 Intent intent = new Intent(mContext, ChoseFoodActivity.class);
+                intent.putExtra("title",catList.get(position)[0]);
                 mContext.startActivity(intent);
             }
         });

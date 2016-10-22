@@ -26,6 +26,8 @@ public class ChoseFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chose_food);
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        String title = getIntent().getStringExtra("title");
+        toolbar.setTitle(title);
 //        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
 //        params.setScrollFlags(0);
         setSupportActionBar(toolbar);

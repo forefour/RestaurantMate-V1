@@ -1,10 +1,12 @@
 package com.app.fa.restaurantmate_v1.fragment;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -73,6 +75,23 @@ public class OrderFoodNowTabFragment extends Fragment {
             public void onClick(View view) {
                 // Click action
                 Log.d("FloatingActionButton","FloatingActionButton");
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(getContext());
+                builder.setTitle("แน่ใจหรือเปล่า?");
+                builder.setMessage("อาหารทั้งหมดในหน้านี้จะถูกส่งไปยังครัว");
+                builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("foodNowDialog","OK");
+                    }
+                });
+                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("foodNowDialog","Cancel");
+                    }
+                });
+                builder.show();
             }
         });
 
