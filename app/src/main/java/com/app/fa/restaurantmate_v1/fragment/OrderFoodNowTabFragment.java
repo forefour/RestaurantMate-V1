@@ -67,6 +67,28 @@ public class OrderFoodNowTabFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         // specify an adapter (see also next example)
         mAdapter = new FoodAdapter(getContext(),myDataset,"foodNow");
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+//        {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+//            {
+//                if (dy > 0 ||dy<0 && fab.isShown())
+//                {
+//                    fab.hide();
+//                }
+//            }
+//
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+//            {
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+//                {
+//                    fab.show();
+//                }
+//
+//                super.onScrollStateChanged(recyclerView, newState);
+//            }
+//        });
         mRecyclerView.setAdapter(mAdapter);
 
         fab = (FloatingActionButton) getView().findViewById(R.id.fab);

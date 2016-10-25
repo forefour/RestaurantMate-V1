@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@android:drawable/ic_dialog_email"
+        android:src="@drawable/cook96"
+        app:layout_behavior="com.app.fa.restaurantmate_v1.ScrollAwareFABBehavior"
         app:backgroundTint="?attr/actionModeSplitBackground" />
 
     <android.support.v7.widget.RecyclerView
