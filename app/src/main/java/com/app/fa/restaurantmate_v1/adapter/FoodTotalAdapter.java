@@ -90,7 +90,7 @@ public class FoodTotalAdapter extends RecyclerView.Adapter<FoodTotalAdapter.MyVi
 
 
         viewRoot = ((OrderActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext,R.style.YourDialogStyle);
         builder.setTitle("ปลากระพงทอดน้ำปลา");
         builder.setView(viewRoot);
         //custom view

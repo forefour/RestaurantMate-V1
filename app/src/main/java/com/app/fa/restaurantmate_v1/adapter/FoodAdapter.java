@@ -90,7 +90,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         View viewRoot = null;
         if(this.from.equals("foodActivity")) {
             viewRoot = ((ChoseFoodActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext,R.style.YourDialogStyle);
             builder.setTitle("ปลากระพงทอดน้ำปลา");
             builder.setView(viewRoot);
             //custom view
@@ -128,7 +128,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         }
         else if(this.from.equals("foodNow")){
             viewRoot = ((OrderActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext,R.style.YourDialogStyle);
             builder.setTitle("ปลากระพงทอดน้ำปลา");
             builder.setView(viewRoot);
             //custom view

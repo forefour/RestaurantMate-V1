@@ -14,7 +14,7 @@
         android:layout_margin="16dp"
         android:src="@drawable/cook96"
         app:layout_behavior="com.app.fa.restaurantmate_v1.ScrollAwareFABBehavior"
-        app:backgroundTint="?attr/actionModeSplitBackground" />
+        app:backgroundTint="@color/fab" />
 
     <android.support.v7.widget.RecyclerView
     android:id="@+id/food_now_recycler_view"

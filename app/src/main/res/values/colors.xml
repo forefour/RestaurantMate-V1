@@ -11,15 +11,24 @@
     <!--<color name="navigationBarColor">#000000</color>-->
     <!--<color name="colorAccent">#c8e8ff</color>-->
 
-    <color name="colorPrimary">#009688</color>
-    <color name="colorPrimaryDark">#00796B</color>
-    <color name="textColorPrimary">#212121</color>
+    <!--<color name="colorPrimary">#009688</color>-->
+    <!--<color name="colorPrimaryDark">#00796B</color>-->
+    <!--<color name="textColorPrimary">#212121</color>-->
+    <!--<color name="windowBackground">#FFFFFF</color>-->
+    <!--<color name="navigationBarColor">#000000</color>-->
+    <!--<color name="colorAccent">#B2DFDB</color>-->
+
+    <color name="colorPrimary">#00897B</color>
+    <color name="colorPrimaryDark">#00695C</color>
+    <color name="textColorPrimary">#000000</color>
     <color name="windowBackground">#FFFFFF</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#B2DFDB</color>
+    <color name="navigationBarColor">#00796B</color>
+    <color name="colorAccent">#1DE9B6</color>
 
     <!--tab color-->
-    <color name="indicatorTab">#FFFFFF</color>
+    <color name="indicatorTab">#1DE9B6</color>
     <!--<color name="selectTab">#212121</color>-->
     <!--<color name="notSelectTab">#9e9e9e</color>-->
+    <color name="white">#ffffff</color>
+    <color name="fab">#00bfa5</color>
 </resources>

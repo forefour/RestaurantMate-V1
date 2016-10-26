@@ -98,7 +98,7 @@ public class OrderFoodNowTabFragment extends Fragment {
                 // Click action
                 Log.d("FloatingActionButton","FloatingActionButton");
                 AlertDialog.Builder builder =
-                        new AlertDialog.Builder(getContext());
+                        new AlertDialog.Builder(getContext(),R.style.YourDialogStyle);
                 builder.setTitle("แน่ใจหรือเปล่า?");
                 builder.setMessage("อาหารทั้งหมดในหน้านี้จะถูกส่งไปยังครัว");
                 builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
