@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
 import com.app.fa.restaurantmate_v1.R;
@@ -105,6 +106,8 @@ public class OrderFoodNowTabFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("foodNowDialog","OK");
+                        Toast toast = Toast.makeText(getContext(),"ส่งไปยังครัวเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 });
                 builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
