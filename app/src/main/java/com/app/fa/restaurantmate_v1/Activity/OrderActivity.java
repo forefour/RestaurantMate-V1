@@ -22,15 +22,24 @@ public class OrderActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    String tableNum;
+
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putString("tableNum", tableNum);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            tableNum = savedInstanceState.getString("tableNum");
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         Intent intent = getIntent();
-        String tableNum = intent.getStringExtra("tableNum");
+        tableNum = intent.getStringExtra("tableNum");
         toolbar.setTitle("โต๊ะที่ " +tableNum);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

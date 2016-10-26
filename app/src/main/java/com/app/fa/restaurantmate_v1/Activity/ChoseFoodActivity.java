@@ -31,7 +31,7 @@ public class ChoseFoodActivity extends AppCompatActivity {
 //        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
 //        params.setScrollFlags(0);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         myDataset = new ArrayList<>();
         for(int i=1; i<=20; i++){
             String[] list = new String[1];
