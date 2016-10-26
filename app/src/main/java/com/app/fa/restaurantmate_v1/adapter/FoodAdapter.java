@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.app.fa.restaurantmate_v1.Activity.ChoseFoodActivity;
@@ -110,6 +111,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d("foodDialog","agree2");
+                            Toast toast = Toast.makeText(mContext,"สั่งเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     });
 
@@ -148,6 +151,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d("foodDialog","agree2");
+                            Toast toast = Toast.makeText(mContext,"สั่งเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     });
 
@@ -165,6 +170,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d("foodDialog","cancel3");
+                            Toast toast = Toast.makeText(mContext,"ลบเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     });
             AlertDialog dialog = builder.create();

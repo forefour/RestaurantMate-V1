@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
 import com.app.fa.restaurantmate_v1.R;
@@ -110,6 +111,8 @@ public class FoodTotalAdapter extends RecyclerView.Adapter<FoodTotalAdapter.MyVi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("foodDialog","agree2");
+                        Toast toast = Toast.makeText(mContext,"สั่งเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 });
 
@@ -127,6 +130,8 @@ public class FoodTotalAdapter extends RecyclerView.Adapter<FoodTotalAdapter.MyVi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("foodDialog","cancel3");
+                        Toast toast = Toast.makeText(mContext,"ลบเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 });
         AlertDialog dialog = builder.create();
