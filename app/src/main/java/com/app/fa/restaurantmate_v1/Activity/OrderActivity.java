@@ -1,5 +1,6 @@
 package com.app.fa.restaurantmate_v1.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,9 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("โต๊ะที่ 1");
+        Intent intent = getIntent();
+        String tableNum = intent.getStringExtra("tableNum");
+        toolbar.setTitle("โต๊ะที่ " +tableNum);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

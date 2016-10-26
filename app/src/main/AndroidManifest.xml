@@ -15,7 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.OrderActivity" />
+        <activity android:name=".Activity.OrderActivity" android:parentActivityName=".Activity.TableActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.TableActivity" />
+        </activity>
         <activity
             android:name=".Activity.ChoseFoodActivity"
             android:parentActivityName=".Activity.OrderActivity">
