@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.OrderActivity" android:parentActivityName=".Activity.TableActivity">
+        <activity
+            android:name=".Activity.OrderActivity"
+            android:parentActivityName=".Activity.TableActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -32,7 +34,8 @@
                 android:value=".Activity.OrderActivity" />
         </activity>
         <activity android:name=".Activity.TableActivity" />
-        <activity android:name=".Activity.ReceiptActivity"
+        <activity
+            android:name=".Activity.ReceiptActivity"
             android:parentActivityName=".Activity.OrderActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -40,6 +43,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.OrderActivity" />
         </activity>
+        <activity android:name=".Activity.AdminActivity" />
+        <activity android:name=".Activity.admin.FoodActivity"></activity>
     </application>
 
 </manifest>

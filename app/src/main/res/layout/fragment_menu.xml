@@ -1,0 +1,25 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.app.fa.restaurantmate_v1.fragment.admin.MenuFragment">
+
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="16dp"
+    android:src="@drawable/cook96"
+    app:layout_behavior="com.app.fa.restaurantmate_v1.ScrollAwareFABBehavior"
+    app:backgroundTint="@color/fab" />
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/cat_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="8dp"
+    android:scrollbars="vertical" />
+
+</android.support.design.widget.CoordinatorLayout>
