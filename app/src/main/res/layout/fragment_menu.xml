@@ -11,7 +11,7 @@ tools:context="com.app.fa.restaurantmate_v1.fragment.admin.MenuFragment">
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|end"
     android:layout_margin="16dp"
-    android:src="@drawable/cook96"
+    android:src="@drawable/add_list_96"
     app:layout_behavior="com.app.fa.restaurantmate_v1.ScrollAwareFABBehavior"
     app:backgroundTint="@color/fab" />
 

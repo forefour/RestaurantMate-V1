@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.app.fa.restaurantmate_v1.Activity.admin.FoodActivity;
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.CatAdapter;
@@ -72,16 +73,18 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Click action
+                View viewRoot = null;
+                viewRoot = getActivity().getLayoutInflater().inflate(R.layout.admin_cat_dialog, null);
                 Log.d("FloatingActionButton","FloatingActionButton");
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(getContext(),R.style.YourDialogStyle);
-                builder.setTitle("แน่ใจหรือเปล่า?");
-                builder.setMessage("อาหารทั้งหมดในหน้านี้จะถูกส่งไปยังครัว");
-                builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                builder.setTitle("เพิ่มประเภทอาหาร");
+                builder.setView(viewRoot);
+                builder.setPositiveButton("เพิ่ม", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("foodNowDialog","OK");
-                        Toast toast = Toast.makeText(getContext(),"ส่งไปยังครัวเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getContext(),"เพิ่มประเภทอาหารเรียบร้อยแล้ว", Toast.LENGTH_LONG);
                         toast.show();
                     }
                 });

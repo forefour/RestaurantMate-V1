@@ -50,7 +50,7 @@ public class FoodActivity extends AppCompatActivity {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this));
+        //mRecyclerView.addItemDecoration(new DividerItemDecoration(this));
         // specify an adapter (see also next example)
         mAdapter = new FoodAdapter(this,myDataset);
         mRecyclerView.setAdapter(mAdapter);
@@ -60,16 +60,18 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Click action
+                View viewRoot = null;
+                viewRoot = FoodActivity.this.getLayoutInflater().inflate(R.layout.admin_food_dialog, null);
                 Log.d("FloatingActionButton","FloatingActionButton");
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(FoodActivity.this,R.style.YourDialogStyle);
-                builder.setTitle("แน่ใจหรือเปล่า?");
-                builder.setMessage("อาหารทั้งหมดในหน้านี้จะถูกส่งไปยังครัว");
+                builder.setTitle("เพิ่มรายการอาหาร");
+                builder.setView(viewRoot);
                 builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("foodNowDialog","OK");
-                        Toast toast = Toast.makeText(FoodActivity.this,"ส่งไปยังครัวเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(FoodActivity.this,"เพิ่มรายการอาหารเรียบร้อยแล้ว", Toast.LENGTH_LONG);
                         toast.show();
                     }
                 });

@@ -6,4 +6,8 @@
         android:id="@+id/edit"
         android:title="แก้ไข"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/delete"
+        android:title="ลบ"
+        app:showAsAction="ifRoom" />
 </menu>
