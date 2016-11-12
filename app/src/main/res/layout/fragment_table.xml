@@ -1,13 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.app.fa.restaurantmate_v1.fragment.admin.TableFragment">
+
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="16dp"
+    android:src="@drawable/edit_96"
+    app:layout_behavior="com.app.fa.restaurantmate_v1.ScrollAwareFABBehavior"
+    app:backgroundTint="@color/fab" />
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.app.fa.restaurantmate_v1.fragment.admin.TableFragment">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50 โต๊ะ"
+        android:textSize="80sp"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:layout_centerInParent="true" />
+</RelativeLayout>
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
