@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.app.fa.restaurantmate_v1.Activity.AdminActivity;
 import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
 import com.app.fa.restaurantmate_v1.Activity.TableActivity;
+import com.app.fa.restaurantmate_v1.Activity.cashier.CashierActivity;
 
 public class MainActivity extends AppCompatActivity {
 //    private Toolbar toolbar;
@@ -48,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // cashier page
+        Button cashierButton = (Button)findViewById(R.id.cashier_button);
+        cashierButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CashierActivity.class);
                 startActivity(intent);
             }
         });
