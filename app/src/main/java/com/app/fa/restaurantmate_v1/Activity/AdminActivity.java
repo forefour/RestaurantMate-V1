@@ -28,8 +28,6 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Intent intent = getIntent();
-        //toolbar.setTitle("โต๊ะที่ " +tableNum);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -10,6 +10,7 @@
     <android.support.v7.widget.AppCompatEditText
         android:layout_width="333dp"
         android:layout_height="wrap_content"
-        android:hint="ชื่อประเภทอาหาร"/>
+        android:hint="ชื่อประเภทอาหาร"
+        android:id="@+id/cat_name"/>
 
 </LinearLayout>

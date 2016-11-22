@@ -12,13 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.fa.restaurantmate_v1.Activity.admin.FoodActivity;
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.CatAdapter;
 import com.app.fa.restaurantmate_v1.adapter.admin.MenuAdapter;
+import com.app.fa.restaurantmate_v1.model.FoodGroup;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +38,17 @@ public class MenuFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<String[]> myDataset;
     private FloatingActionButton fab;
+    private MyApplication myApplication;
 
     public MenuFragment() {
-        myDataset = new ArrayList<>();
-        for(int i=1; i<=20; i++){
-            String[] list = new String[1];
-            list[0] = "ปลา";
-            myDataset.add(list);
-        }
+//        myDataset = new ArrayList<>();
+//        for(int i=1; i<=20; i++){
+//            String[] list = new String[1];
+//            list[0] = "ปลา";
+//            myDataset.add(list);
+//        }
+
+
     }
 
 
@@ -53,19 +62,31 @@ public class MenuFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        // Inflate the layout for this fragment
+
+        myApplication = (MyApplication)(getActivity().getApplicationContext());
+
+        DatabaseReference foodGroupRef = myApplication.getDatabaseReference().child("foodgroup");
+        FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<FoodGroup, FoodGroupViewHolder>(FoodGroup.class, R.layout.admin_cat_list, FoodGroupViewHolder.class, foodGroupRef) {
+            @Override
+            protected void populateViewHolder(final FoodGroupViewHolder viewHolder, final FoodGroup model, int position) {
+                viewHolder.name.setText(model.getName());
+                viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("Test","click root view "+model.getName());
+
+                    }
+                });
+            }
+        };
+
         mRecyclerView = (RecyclerView) getView().findViewById(R.id.cat_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        // specify an adapter (see also next example)
-        mAdapter = new MenuAdapter(getContext(),myDataset);
+
+        //mAdapter = new MenuAdapter(getContext(),myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
         fab = (FloatingActionButton) getView().findViewById(R.id.fab);
@@ -75,6 +96,7 @@ public class MenuFragment extends Fragment {
                 // Click action
                 View viewRoot = null;
                 viewRoot = getActivity().getLayoutInflater().inflate(R.layout.admin_cat_dialog, null);
+                final TextView textView = (TextView)viewRoot.findViewById(R.id.cat_name);
                 Log.d("FloatingActionButton","FloatingActionButton");
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(getContext(),R.style.YourDialogStyle);
@@ -84,6 +106,7 @@ public class MenuFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("foodNowDialog","OK");
+                        myApplication.getDatabaseReference().child("foodgroup").push().child("name").setValue(textView.getText().toString());
                         Toast toast = Toast.makeText(getContext(),"เพิ่มประเภทอาหารเรียบร้อยแล้ว", Toast.LENGTH_LONG);
                         toast.show();
                     }
@@ -99,5 +122,14 @@ public class MenuFragment extends Fragment {
         });
     }
 
+    public static class FoodGroupViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        View rootView;
 
+        public FoodGroupViewHolder(View itemView) {
+            super(itemView);
+            rootView = itemView;
+            name = (TextView)itemView.findViewById(R.id.text1_textview);
+        }
+    }
 }
