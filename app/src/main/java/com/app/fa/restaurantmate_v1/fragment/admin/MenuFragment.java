@@ -2,6 +2,7 @@ package com.app.fa.restaurantmate_v1.fragment.admin;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -65,7 +66,7 @@ public class MenuFragment extends Fragment {
 
         myApplication = (MyApplication)(getActivity().getApplicationContext());
 
-        DatabaseReference foodGroupRef = myApplication.getDatabaseReference().child("foodgroup");
+        final DatabaseReference foodGroupRef = myApplication.getDatabaseReference().child("foodgroup");
         FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<FoodGroup, FoodGroupViewHolder>(FoodGroup.class, R.layout.admin_cat_list, FoodGroupViewHolder.class, foodGroupRef) {
             @Override
             protected void populateViewHolder(final FoodGroupViewHolder viewHolder, final FoodGroup model, int position) {
@@ -74,6 +75,11 @@ public class MenuFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Log.d("Test","click root view "+model.getName());
+                        Intent intent = new Intent(getContext(), FoodActivity.class);
+                        intent.putExtra("title",model.getName());
+                        intent.putExtra("foodGroupId",foodGroupRef.getKey());
+                        Log.d("key","key-> "+model.getName());
+                        getContext().startActivity(intent);
 
                     }
                 });
