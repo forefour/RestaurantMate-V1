@@ -35,12 +35,12 @@ import java.util.List;
  */
 public class MenuFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    //private RecyclerView.Adapter mAdapter;
+    private FirebaseRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<String[]> myDataset;
+    //private List<String[]> myDataset;
     private FloatingActionButton fab;
     private MyApplication myApplication;
-
     public MenuFragment() {
 //        myDataset = new ArrayList<>();
 //        for(int i=1; i<=20; i++){
@@ -67,20 +67,18 @@ public class MenuFragment extends Fragment {
         myApplication = (MyApplication)(getActivity().getApplicationContext());
 
         final DatabaseReference foodGroupRef = myApplication.getDatabaseReference().child("foodgroup");
-        FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<FoodGroup, FoodGroupViewHolder>(FoodGroup.class, R.layout.admin_cat_list, FoodGroupViewHolder.class, foodGroupRef) {
+        mAdapter = new FirebaseRecyclerAdapter<FoodGroup, FoodGroupViewHolder>(FoodGroup.class, R.layout.admin_cat_list, FoodGroupViewHolder.class, foodGroupRef) {
             @Override
-            protected void populateViewHolder(final FoodGroupViewHolder viewHolder, final FoodGroup model, int position) {
+            protected void populateViewHolder(final FoodGroupViewHolder viewHolder, final FoodGroup model, final int position) {
                 viewHolder.name.setText(model.getName());
                 viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("Test","click root view "+model.getName());
                         Intent intent = new Intent(getContext(), FoodActivity.class);
                         intent.putExtra("title",model.getName());
-                        intent.putExtra("foodGroupId",foodGroupRef.getKey());
-                        Log.d("key","key-> "+model.getName());
+                        String foodGroupId = mAdapter.getRef(position).getKey();
+                        intent.putExtra("foodGroupId",foodGroupId);
                         getContext().startActivity(intent);
-
                     }
                 });
             }

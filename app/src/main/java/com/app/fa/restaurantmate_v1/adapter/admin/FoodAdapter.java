@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.app.fa.restaurantmate_v1.Activity.AdminActivity;
 import com.app.fa.restaurantmate_v1.Activity.admin.FoodActivity;
 import com.app.fa.restaurantmate_v1.R;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     private Context mContext;
-    private List<String[]> catList;
+    private List<DataSnapshot> catList;
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
@@ -53,7 +54,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     }
 
 
-    public FoodAdapter(Context mContext, List<String[]> catList) {
+    public FoodAdapter(Context mContext, List<DataSnapshot> catList) {
         this.mContext = mContext;
         this.catList = catList;
     }
@@ -68,7 +69,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.text1.setText(catList.get(position)[0]+" (250บ.)");
+        holder.text1.setText(catList.get(position).getKey()+" (250บ.)");
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,7 +10,8 @@
     <android.support.v7.widget.AppCompatEditText
         android:layout_width="333dp"
         android:layout_height="wrap_content"
-        android:hint="ชื่อรายการอาหาร"/>
+        android:hint="ชื่อรายการอาหาร"
+        android:id="@+id/name"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,11 +20,12 @@
         <android.support.v7.widget.AppCompatEditText
             android:layout_width="111dp"
             android:layout_height="wrap_content"
-            android:hint="ราคา"/>
+            android:hint="ราคา"
+            android:id="@+id/price"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="บาท"/>
+            android:text="บาท" />
     </LinearLayout>
 
 
