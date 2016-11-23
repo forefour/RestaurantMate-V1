@@ -14,7 +14,6 @@
             android:id="@+id/text1_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="test1111111"
             android:textSize="16sp"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"

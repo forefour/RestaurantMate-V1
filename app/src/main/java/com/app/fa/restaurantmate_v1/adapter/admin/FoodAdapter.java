@@ -19,8 +19,12 @@ import android.widget.Toast;
 
 import com.app.fa.restaurantmate_v1.Activity.AdminActivity;
 import com.app.fa.restaurantmate_v1.Activity.admin.FoodActivity;
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -31,6 +35,8 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     private Context mContext;
     private List<DataSnapshot> catList;
+    private MyApplication myApplication;
+    private String foodGroupId;
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
@@ -54,9 +60,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     }
 
 
-    public FoodAdapter(Context mContext, List<DataSnapshot> catList) {
+    public FoodAdapter(Context mContext, List<DataSnapshot> catList, String foodGroupId) {
         this.mContext = mContext;
         this.catList = catList;
+        this.myApplication = (MyApplication)mContext.getApplicationContext();
+        this.foodGroupId = foodGroupId;
     }
 
     @Override
@@ -69,7 +77,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.text1.setText(catList.get(position).getKey()+" (250บ.)");
+        DatabaseReference foodRef = myApplication.getDatabaseReference().child("food").child(catList.get(position).getKey());
+        foodRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String foodName = dataSnapshot.child("name").getValue().toString();
+                String price = dataSnapshot.child("price").getValue().toString();
+                holder.text1.setText(foodName+" ("+price+"บ.)");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //holder.text1.setText(catList.get(position).getKey()+" (250บ.)");
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,10 +120,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.edit:
-                        showDialog("edit");
+                        showDialog("edit",position);
                         break;
                     case R.id.delete:
-                        showDialog("delete");
+                        showDialog("delete",position);
                         break;
                 }
                 return false;
@@ -110,7 +132,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         popup.show();
     }
 
-    private void showDialog(String string) {
+    private void showDialog(String string, final int position) {
         if(string.equals("edit")) {
             FoodActivity foodActivity = (FoodActivity)mContext;
             View viewRoot = null;
@@ -140,11 +162,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(mContext,R.style.YourDialogStyle);
             builder.setTitle("แน่ใจหรือเปล่า?");
-            builder.setMessage("ประเภทอาหารนี้จะถูกลบ");
+            builder.setMessage("รายการอาหารนี้จะถูกลบ");
             builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Log.d("foodNowDialog","OK");
+                    myApplication.getDatabaseReference().child("food").child(catList.get(position).getKey()).removeValue();
+                    myApplication.getDatabaseReference().child("foodgroup").child(foodGroupId).child("food").child(catList.get(position).getKey()).removeValue();
                     Toast toast = Toast.makeText(mContext,"ลบเรียบร้อยแล้ว", Toast.LENGTH_LONG);
                     toast.show();
                 }

@@ -97,7 +97,7 @@ public class FoodActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new FoodAdapter(this,myDataset);
+        mAdapter = new FoodAdapter(this,myDataset,foodGroupId);
         mRecyclerView.setAdapter(mAdapter);
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
