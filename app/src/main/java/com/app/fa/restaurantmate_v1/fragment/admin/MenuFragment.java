@@ -8,14 +8,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.fa.restaurantmate_v1.Activity.AdminActivity;
 import com.app.fa.restaurantmate_v1.Activity.admin.FoodActivity;
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
 import com.app.fa.restaurantmate_v1.MyApplication;
@@ -71,14 +76,20 @@ public class MenuFragment extends Fragment {
             @Override
             protected void populateViewHolder(final FoodGroupViewHolder viewHolder, final FoodGroup model, final int position) {
                 viewHolder.name.setText(model.getName());
+                final String foodGroupId = mAdapter.getRef(position).getKey();
                 viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getContext(), FoodActivity.class);
                         intent.putExtra("title",model.getName());
-                        String foodGroupId = mAdapter.getRef(position).getKey();
-                        intent.putExtra("foodGroupId",foodGroupId);
+                        intent.putExtra("foodGroupId", foodGroupId);
                         getContext().startActivity(intent);
+                    }
+                });
+                viewHolder.imageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopup(viewHolder.imageButton,foodGroupId);
                     }
                 });
             }
@@ -129,11 +140,92 @@ public class MenuFragment extends Fragment {
     public static class FoodGroupViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         View rootView;
+        ImageButton imageButton;
 
         public FoodGroupViewHolder(View itemView) {
             super(itemView);
             rootView = itemView;
             name = (TextView)itemView.findViewById(R.id.text1_textview);
+            imageButton = (ImageButton)itemView.findViewById(R.id.menu_popup);
         }
+    }
+
+    private void showPopup(View view, final String foodGroupId) {
+        // pass the imageview id
+        //View menuItemView = view.findViewById(R.id.btn_song_list_more);
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
+        MenuInflater inflate = popup.getMenuInflater();
+        inflate.inflate(R.menu.item_menu, popup.getMenu());
+
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.edit:
+                        showDialog("edit",foodGroupId);
+                        break;
+                    case R.id.delete:
+                        showDialog("delete",foodGroupId);
+                        break;
+                }
+                return false;
+            }
+        });
+        popup.show();
+    }
+
+    private void showDialog(String string, final String foodGroupId) {
+        if(string.equals("edit")) {
+
+            View viewRoot = null;
+            AdminActivity adminActivity = (AdminActivity) getActivity();
+            viewRoot = adminActivity.getLayoutInflater().inflate(R.layout.admin_cat_dialog, null);
+            final TextView name = (TextView)viewRoot.findViewById(R.id.cat_name);
+            Log.d("FloatingActionButton", "FloatingActionButton");
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(getActivity(), R.style.YourDialogStyle);
+            builder.setTitle("แก้ไขประเภทอาหาร");
+            builder.setView(viewRoot);
+            builder.setPositiveButton("แก้ไข", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("foodNowDialog", "OK");
+                    myApplication.getDatabaseReference().child("foodgroup").child(foodGroupId).child("name").setValue(name.getText().toString());
+                    Toast toast = Toast.makeText(getActivity(), "แก้ไขประเภทอาหารเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
+            builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("foodNowDialog", "Cancel");
+                }
+            });
+            builder.show();
+        }
+        else if(string.equals("delete")){
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(getActivity(),R.style.YourDialogStyle);
+            builder.setTitle("แน่ใจหรือเปล่า?");
+            builder.setMessage("ประเภทอาหารนี้จะถูกลบ");
+            builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("delete",foodGroupId);
+                    myApplication.getDatabaseReference().child("foodgroup").child(foodGroupId).removeValue();
+                    Toast toast = Toast.makeText(getActivity(),"ลบเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
+            builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d("foodNowDialog","Cancel");
+                }
+            });
+            builder.show();
+        }
+
     }
 }

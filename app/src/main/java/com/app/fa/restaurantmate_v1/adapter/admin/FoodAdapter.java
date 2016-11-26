@@ -78,7 +78,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         DatabaseReference foodRef = myApplication.getDatabaseReference().child("food").child(catList.get(position).getKey());
-        foodRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        foodRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String foodName = dataSnapshot.child("name").getValue().toString();
@@ -137,6 +137,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
             FoodActivity foodActivity = (FoodActivity)mContext;
             View viewRoot = null;
             viewRoot = foodActivity.getLayoutInflater().inflate(R.layout.admin_food_dialog, null);
+            final TextView name,price;
+            name = (TextView)viewRoot.findViewById(R.id.name);
+            price = (TextView)viewRoot.findViewById(R.id.price);
             Log.d("FloatingActionButton","FloatingActionButton");
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(mContext,R.style.YourDialogStyle);
@@ -146,6 +149,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Log.d("foodNowDialog","OK");
+                    DatabaseReference foodRef = myApplication.getDatabaseReference().child("food").child(catList.get(position).getKey());
+                    foodRef.child("name").setValue(name.getText().toString());
+                    foodRef.child("price").setValue(price.getText().toString());
+                    //notifyDataSetChanged();
                     Toast toast = Toast.makeText(mContext,"แก้ไขรายการอาหารเรียบร้อยแล้ว", Toast.LENGTH_LONG);
                     toast.show();
                 }
