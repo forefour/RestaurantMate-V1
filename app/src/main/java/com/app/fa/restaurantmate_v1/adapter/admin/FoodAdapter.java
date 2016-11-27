@@ -81,9 +81,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         foodRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String foodName = dataSnapshot.child("name").getValue().toString();
-                String price = dataSnapshot.child("price").getValue().toString();
-                holder.text1.setText(foodName+" ("+price+"บ.)");
+                if(dataSnapshot.getValue() != null) {
+                    String foodName = dataSnapshot.child("name").getValue().toString();
+                    String price = dataSnapshot.child("price").getValue().toString();
+                    holder.text1.setText(foodName + " (" + price + "บ.)");
+                }
             }
 
             @Override
