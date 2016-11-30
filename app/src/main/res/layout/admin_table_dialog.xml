@@ -11,9 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:layout_width="111dp"
             android:layout_height="wrap_content"
+            android:id="@+id/table_num_edit"
             android:hint="จำนวนโต๊ะ"/>
         <TextView
             android:layout_width="wrap_content"

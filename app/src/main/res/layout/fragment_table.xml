@@ -22,11 +22,11 @@ tools:context="com.app.fa.restaurantmate_v1.fragment.admin.TableFragment">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="50 โต๊ะ"
         android:textSize="80sp"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="false"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:id="@+id/table_num"/>
 </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

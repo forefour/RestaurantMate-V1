@@ -11,9 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -22,6 +29,7 @@ import java.util.List;
  */
 public class TableFragment extends Fragment {
     private FloatingActionButton fab;
+    MyApplication myApplication;
 
     public TableFragment() {
         // Required empty public constructor
@@ -38,6 +46,21 @@ public class TableFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
+        myApplication = (MyApplication)(getActivity().getApplicationContext());
+        final TextView tableNum = (TextView)getView().findViewById(R.id.table_num);
+        final DatabaseReference tableNumRef = myApplication.getDatabaseReference().child("tableNum");
+        tableNumRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tableNum.setText(dataSnapshot.getValue().toString()+" โต๊ะ");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         fab = (FloatingActionButton) getView().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +68,7 @@ public class TableFragment extends Fragment {
                 // Click action
                 View viewRoot = null;
                 viewRoot = getActivity().getLayoutInflater().inflate(R.layout.admin_table_dialog, null);
+                final EditText tableNumEdit = (EditText)viewRoot.findViewById(R.id.table_num_edit);
                 Log.d("FloatingActionButton","FloatingActionButton");
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(getContext(),R.style.YourDialogStyle);
@@ -53,7 +77,7 @@ public class TableFragment extends Fragment {
                 builder.setPositiveButton("แก้ไข", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("foodNowDialog","OK");
+                        tableNumRef.setValue(tableNumEdit.getText().toString());
                         Toast toast = Toast.makeText(getContext(),"แก้ไขจำนวนโต๊ะเรียบร้อยแล้ว", Toast.LENGTH_LONG);
                         toast.show();
                     }

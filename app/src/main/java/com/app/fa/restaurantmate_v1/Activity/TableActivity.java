@@ -10,9 +10,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.fragment.MenuTabFragment;
 import com.app.fa.restaurantmate_v1.fragment.TableSelectFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +26,7 @@ public class TableActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    MyApplication myApplication;
 
     private TableSelectFragment tab1 = new TableSelectFragment();
     private TableSelectFragment tab2 = new TableSelectFragment();
@@ -29,7 +35,7 @@ public class TableActivity extends AppCompatActivity {
 
     private ArrayList<Integer> tables = new ArrayList<>();
 
-    private int countTable = 32;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,44 +46,58 @@ public class TableActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (countTable % 3 == 0) {
-            tab1.setStart(1);
-            tab1.setEnd(countTable/3);
+        myApplication = (MyApplication)getApplicationContext();
+        final DatabaseReference tableNumRef = myApplication.getDatabaseReference().child("tableNum");
+        tableNumRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int countTable = Integer.parseInt(dataSnapshot.getValue().toString());
+                if (countTable % 3 == 0) {
+                    tab1.setStart(1);
+                    tab1.setEnd(countTable/3);
 
-            tab2.setStart(countTable/3 + 1);
-            tab2.setEnd(countTable/3 * 2);
+                    tab2.setStart(countTable/3 + 1);
+                    tab2.setEnd(countTable/3 * 2);
 
-            tab3.setStart(countTable/3 * 2 + 1);
-            tab3.setEnd(countTable);
-        }
+                    tab3.setStart(countTable/3 * 2 + 1);
+                    tab3.setEnd(countTable);
+                }
 
-        else if (countTable % 3 == 1) {
-            tab1.setStart(1);
-            tab1.setEnd(countTable/3 + 1);
+                else if (countTable % 3 == 1) {
+                    tab1.setStart(1);
+                    tab1.setEnd(countTable/3 + 1);
 
 
-            tab2.setStart(countTable/3 + 2);
-            tab2.setEnd(countTable/3 * 2 + 1);
+                    tab2.setStart(countTable/3 + 2);
+                    tab2.setEnd(countTable/3 * 2 + 1);
 
-            tab3.setStart(countTable/3 * 2 + 2);
-            tab3.setEnd(countTable);
-        }
+                    tab3.setStart(countTable/3 * 2 + 2);
+                    tab3.setEnd(countTable);
+                }
 
-        else if (countTable % 3 == 2) {
-            tab1.setStart(1);
-            tab1.setEnd(countTable/3 + 1);
+                else if (countTable % 3 == 2) {
+                    tab1.setStart(1);
+                    tab1.setEnd(countTable/3 + 1);
 
-            tab2.setStart(countTable/3 + 2);
-            tab2.setEnd(countTable/3 * 2 + 2);
+                    tab2.setStart(countTable/3 + 2);
+                    tab2.setEnd(countTable/3 * 2 + 2);
 
-            tab3.setStart(countTable/3 * 2 + 3);
-            tab3.setEnd(countTable);
-        }
+                    tab3.setStart(countTable/3 * 2 + 3);
+                    tab3.setEnd(countTable);
+                }
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+                viewPager = (ViewPager) findViewById(R.id.viewpager);
+                setupViewPager(viewPager);
+                tabLayout = (TabLayout) findViewById(R.id.tabs);
+                tabLayout.setupWithViewPager(viewPager);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 
