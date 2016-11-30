@@ -5,13 +5,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.CatAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +27,10 @@ public class MenuTabFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<String[]> myDataset;
+    private MyApplication myApplication;
+    private List<DataSnapshot> myDataset;
     public MenuTabFragment() {
         // Required empty public constructor
-        myDataset = new ArrayList<>();
-        for(int i=1; i<=20; i++){
-            String[] list = new String[1];
-            list[0] = "ปลา";
-            myDataset.add(list);
-        }
     }
 
 
@@ -41,20 +43,35 @@ public class MenuTabFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        // Inflate the layout for this fragment
+        myDataset = new ArrayList<>();
         mRecyclerView = (RecyclerView) getView().findViewById(R.id.cat_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        // specify an adapter (see also next example)
-        mAdapter = new CatAdapter(getContext(),myDataset);
+        mAdapter = new CatAdapter(getContext(), myDataset);
         mRecyclerView.setAdapter(mAdapter);
+
+
+        myApplication = (MyApplication)(getActivity().getApplicationContext());
+        DatabaseReference foodGroupRef = myApplication.getDatabaseReference().child("foodgroup");
+        foodGroupRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("dataSnapshot",dataSnapshot.toString());
+                myDataset.clear();
+                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                    myDataset.add(messageSnapshot);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }

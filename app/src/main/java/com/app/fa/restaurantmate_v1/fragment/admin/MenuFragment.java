@@ -71,8 +71,8 @@ public class MenuFragment extends Fragment {
 
         myApplication = (MyApplication)(getActivity().getApplicationContext());
 
-        final DatabaseReference foodGroupRef = myApplication.getDatabaseReference().child("foodgroup");
-        Query foodGroupQuery = foodGroupRef.orderByChild("name");
+        final DatabaseReference foodGroupQuery = myApplication.getDatabaseReference().child("foodgroup");
+        //Query foodGroupQuery = foodGroupRef.orderByChild("name");
         mAdapter = new FirebaseRecyclerAdapter<FoodGroup, FoodGroupViewHolder>(FoodGroup.class, R.layout.admin_cat_list, FoodGroupViewHolder.class, foodGroupQuery) {
             @Override
             protected void populateViewHolder(final FoodGroupViewHolder viewHolder, final FoodGroup model, final int position) {

@@ -10,7 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.fa.restaurantmate_v1.Activity.ChoseFoodActivity;
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -20,8 +25,8 @@ import java.util.List;
 
 public class CatAdapter extends RecyclerView.Adapter<CatAdapter.MyViewHolder>{
     private Context mContext;
-    private List<String[]> catList;
-
+    private List<DataSnapshot> catList;
+    private MyApplication myApplication;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
@@ -40,9 +45,10 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.MyViewHolder>{
     }
 
 
-    public CatAdapter(Context mContext, List<String[]> catList) {
+    public CatAdapter(Context mContext, List<DataSnapshot> catList) {
         this.mContext = mContext;
         this.catList = catList;
+        this.myApplication = (MyApplication)mContext.getApplicationContext();
     }
 
     @Override
@@ -55,13 +61,13 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.text1.setText(catList.get(position)[0]);
+        holder.text1.setText(catList.get(position).child("name").getValue().toString());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Foremost","123");
                 Intent intent = new Intent(mContext, ChoseFoodActivity.class);
-                intent.putExtra("title",catList.get(position)[0]);
+                intent.putExtra("title",catList.get(position).getKey());
                 mContext.startActivity(intent);
             }
         });
