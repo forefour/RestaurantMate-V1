@@ -56,69 +56,47 @@ public class OrderFoodNowTabFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        mRecyclerView = (RecyclerView) getView().findViewById(R.id.food_now_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        // specify an adapter (see also next example)
-        mAdapter = new FoodAdapter(getContext(),myDataset,"foodNow");
-//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
-//        {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
-//            {
-//                if (dy > 0 ||dy<0 && fab.isShown())
-//                {
-//                    fab.hide();
-//                }
-//            }
+//        mRecyclerView = (RecyclerView) getView().findViewById(R.id.food_now_recycler_view);
 //
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
-//            {
-//                if (newState == RecyclerView.SCROLL_STATE_IDLE)
-//                {
-//                    fab.show();
-//                }
 //
-//                super.onScrollStateChanged(recyclerView, newState);
+//        mRecyclerView.setHasFixedSize(true);
+//
+//
+//        mLayoutManager = new LinearLayoutManager(getActivity());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
+//
+//        mAdapter = new FoodAdapter(getContext(),myDataset,"foodNow");
+//
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//        fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Click action
+//                Log.d("FloatingActionButton","FloatingActionButton");
+//                AlertDialog.Builder builder =
+//                        new AlertDialog.Builder(getContext(),R.style.YourDialogStyle);
+//                builder.setTitle("แน่ใจหรือเปล่า?");
+//                builder.setMessage("อาหารทั้งหมดในหน้านี้จะถูกส่งไปยังครัว");
+//                builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.d("foodNowDialog","OK");
+//                        Toast toast = Toast.makeText(getContext(),"ส่งไปยังครัวเรียบร้อยแล้ว", Toast.LENGTH_LONG);
+//                        toast.show();
+//                    }
+//                });
+//                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.d("foodNowDialog","Cancel");
+//                    }
+//                });
+//                builder.show();
 //            }
 //        });
-        mRecyclerView.setAdapter(mAdapter);
-
-        fab = (FloatingActionButton) getView().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Click action
-                Log.d("FloatingActionButton","FloatingActionButton");
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(getContext(),R.style.YourDialogStyle);
-                builder.setTitle("แน่ใจหรือเปล่า?");
-                builder.setMessage("อาหารทั้งหมดในหน้านี้จะถูกส่งไปยังครัว");
-                builder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("foodNowDialog","OK");
-                        Toast toast = Toast.makeText(getContext(),"ส่งไปยังครัวเรียบร้อยแล้ว", Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                });
-                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("foodNowDialog","Cancel");
-                    }
-                });
-                builder.show();
-            }
-        });
 
     }
 

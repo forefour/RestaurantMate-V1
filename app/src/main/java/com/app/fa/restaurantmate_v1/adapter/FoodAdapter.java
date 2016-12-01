@@ -1,5 +1,6 @@
 package com.app.fa.restaurantmate_v1.adapter;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +21,12 @@ import android.widget.Toast;
 
 import com.app.fa.restaurantmate_v1.Activity.ChoseFoodActivity;
 import com.app.fa.restaurantmate_v1.Activity.OrderActivity;
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.List;
@@ -31,8 +37,8 @@ import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     private Context mContext;
-    private List<String[]> catList;
-
+    private List<DataSnapshot> catList;
+    private MyApplication myApplication;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
@@ -54,10 +60,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     }
 
 
-    public FoodAdapter(Context mContext, List<String[]> catList, String from) {
+    public FoodAdapter(Context mContext, List<DataSnapshot> catList, String from) {
         this.mContext = mContext;
         this.catList = catList;
         this.from = from;
+        this.myApplication = (MyApplication)mContext.getApplicationContext();
     }
 
     @Override
@@ -70,12 +77,40 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        holder.text1.setText(catList.get(position)[0]);
-        //holder.text2.setText(catList.get(position)[1]);
+
+
+        final DatabaseReference foodRef = myApplication.getDatabaseReference().child("food").child(catList.get(position).getKey());
+        foodRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null) {
+                    String foodName = dataSnapshot.child("name").getValue().toString();
+                    holder.text1.setText(foodName);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLocationDialog();
+                foodRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String foodName = dataSnapshot.child("name").getValue().toString();
+                        showLocationDialog(foodName);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
             }
         });
@@ -87,12 +122,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
         return catList.size();
     }
 
-    private void showLocationDialog() {
+    private void showLocationDialog(String foodName) {
         View viewRoot = null;
         if(this.from.equals("foodActivity")) {
             viewRoot = ((ChoseFoodActivity) mContext).getLayoutInflater().inflate(R.layout.custom_dialog, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext,R.style.YourDialogStyle);
-            builder.setTitle("ปลากระพงทอดน้ำปลา");
+            builder.setTitle(foodName);
             builder.setView(viewRoot);
             //custom view
             AppCompatSpinner spinner = (AppCompatSpinner) viewRoot.findViewById(R.id.planets_spinner);

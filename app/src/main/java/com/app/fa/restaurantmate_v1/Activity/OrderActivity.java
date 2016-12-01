@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.fragment.MenuTabFragment;
@@ -23,6 +24,7 @@ public class OrderActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     String tableNum;
+    String orderId;
 
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
@@ -40,6 +42,9 @@ public class OrderActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         Intent intent = getIntent();
         tableNum = intent.getStringExtra("tableNum");
+        orderId = intent.getStringExtra("orderId");
+        Log.d("orderActivity",tableNum);
+        Log.d("orderActivity",orderId);
         toolbar.setTitle("โต๊ะที่ " +tableNum);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
