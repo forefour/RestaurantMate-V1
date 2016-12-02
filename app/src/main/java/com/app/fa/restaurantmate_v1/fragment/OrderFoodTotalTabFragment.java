@@ -75,6 +75,7 @@ public class OrderFoodTotalTabFragment extends Fragment {
                 // Click action
                 Intent intent = new Intent(getContext(), ReceiptActivity.class);
                 OrderActivity orderActivity = (OrderActivity)getActivity();
+                intent.putExtra("tableNum",orderActivity.getTableNum());
                 intent.putExtra("title",orderActivity.getToolbar().getTitle());
                 startActivity(intent);
             }

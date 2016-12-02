@@ -1,5 +1,6 @@
 package com.app.fa.restaurantmate_v1.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.app.fa.restaurantmate_v1.DividerItemDecoration;
+import com.app.fa.restaurantmate_v1.MyApplication;
 import com.app.fa.restaurantmate_v1.R;
 import com.app.fa.restaurantmate_v1.adapter.FoodAdapter;
 import com.app.fa.restaurantmate_v1.adapter.ReceiptAdapter;
@@ -25,12 +27,14 @@ public class ReceiptActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<String[]> myDataset;
+    private MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipt);
 
+        myApplication = (MyApplication)getApplicationContext();
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         String title = getIntent().getStringExtra("title");
         toolbar.setTitle("ใบเสร็จรับเงิน "+title);
@@ -79,7 +83,11 @@ public class ReceiptActivity extends AppCompatActivity {
                 Log.d("Menu_bar","printReceipt");
                 return true;
             case R.id.clearTable:
-                Log.d("Menu_bar","clearTable");
+                String tableNum = getIntent().getStringExtra("tableNum");
+                Log.d("Menu_bar",tableNum);
+                myApplication.getDatabaseReference().child("activeTable").child(tableNum).removeValue();
+                Intent intent = new Intent(this, TableActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

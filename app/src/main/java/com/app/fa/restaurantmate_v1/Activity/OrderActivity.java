@@ -24,17 +24,36 @@ public class OrderActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     String tableNum;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getTableNum() {
+        return tableNum;
+    }
+
+    public void setTableNum(String tableNum) {
+        this.tableNum = tableNum;
+    }
+
     String orderId;
 
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
         bundle.putString("tableNum", tableNum);
+        bundle.putString("orderId", orderId);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null){
             tableNum = savedInstanceState.getString("tableNum");
+            orderId = savedInstanceState.getString("orderId");
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
